@@ -8,7 +8,12 @@ class Settings(BaseSettings):
     DB_PORT: int = 5431
     DB_USER: str = 'docker_postgres'
     DB_PASSWORD: str = 'docker_postgres'
+    DB_DRIVER: str = 'postgresql+psycopg2'
     DB_NAME: str = 'docker_postgres'
     CACHE_HOST: str = 'localhost'
     CACHE_PORT: int = 6378
     CACHE_DB: int = 0
+
+    @property
+    def db_url(self):
+        return f"{self.DB_DRIVER}://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"

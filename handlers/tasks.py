@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter,status, Depends
 
 # from fixtures import tasks as fixtures_tasks
-from dependency import get_tasks_repository, get_tasks_cache_repository
+from dependency import get_tasks_repository, get_tasks_cache_repository, get_task_service
 from schema.task import Task
 from repository import TaskRepository, TaskCache
 
