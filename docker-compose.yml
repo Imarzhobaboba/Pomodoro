@@ -1,0 +1,74 @@
+# # Use postgres/example user/password credentials
+# version: '3.9'
+
+# services:
+
+#   db:
+#     image: postgres
+#     restart: always
+#     # set shared memory limit when using docker-compose
+#     shm_size: 128mb
+#     # or set shared memory limit when deploy via swarm stack
+#     #volumes:
+#     #  - type: tmpfs
+#     #    target: /dev/shm
+#     #    tmpfs:
+#     #      size: 134217728 # 128*2^20 bytes = 128Mb
+#     environment:
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_USER: user
+
+#   adminer:
+#     image: adminer
+#     restart: always
+#     ports:
+#       - 8080:8080
+
+# version: '3.9'
+
+# services:
+#   db:
+#     image: postgres:17
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: postgres
+#       POSTGRES_HOST_AUTH_METHOD: md5
+#     ports:
+#       - "5431:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     command:
+#       - "postgres"
+#       - "-c"
+#       - "listen_addresses=*"
+
+# volumes:
+#   postgres_data:
+
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_redis_06.05.25
+    environment:
+      POSTGRES_USER: docker_postgres
+      POSTGRES_PASSWORD: docker_postgres
+      POSTGRES_DB: docker_postgres
+    ports:
+      - "5431:5432"  # внешний_порт:внутренний_порт
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # сохраняет данные после перезапуска
+    restart: unless-stopped  # автоматически перезапускать контейнер, если он упал
+  
+  cache:
+    image: redis:7.2.4-alpine
+    restart: always
+    ports:
+      - '6378:6379'
+
+volumes:
+  postgres_data:  # создает именованный том для хранения данных
+
