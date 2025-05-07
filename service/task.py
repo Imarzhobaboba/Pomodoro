@@ -12,7 +12,7 @@ class TaskService:
 
     def get_tasks(self):
         if cache_task := self.task_cache.get_tasks():
-            return tasks
+            return cache_task
         else:
             tasks = self.task_repository.get_tasks()
             tasks_schema = [Task.model_validate(task) for task in tasks]
