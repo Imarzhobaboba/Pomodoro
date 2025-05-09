@@ -1,4 +1,6 @@
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base, DeclarativeBase, declared_attr
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, declared_attr
+from typing import Optional
 
 class Base(DeclarativeBase):
     id: any
@@ -21,6 +23,7 @@ class Tasks(Base):
     name: Mapped[str]
     pomodoro_count: Mapped[int]
     category_id: Mapped[int]
+    user_id: Mapped[int] = mapped_column(ForeignKey('userprofile.id'), nullable=False)
 
 
 class Categories(Base):
@@ -36,4 +39,3 @@ class UserProfile(Base):
     id: Mapped[int] = mapped_column(primary_key=True, nullable=False)
     username: Mapped[str] = mapped_column(nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
-    access_token: Mapped[str] = mapped_column(nullable=False)
