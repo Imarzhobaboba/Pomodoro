@@ -7,7 +7,7 @@ router = APIRouter(prefix="/ping", tags=["ping"])
 @router.get("/db")
 async def ping_db():
     settings = Settings()
-    return {"message": settings.GOOGLE_TOKEN_ID}
+    return {"message": settings.YANDEX_TOKEN_ID}
 
 
 @router.get("/app")
