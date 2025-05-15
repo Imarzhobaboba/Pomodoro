@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     YANDEX_SECRET_KEY: str = ''
     YANDEX_REDIRECT_URI: str = ''
     YANDEX_REDIRECT_KEY: str = 'http://localhost:8000/api/auth/yandex'
+    YANDEX_TOKEN_URL: str = 'https://oauth.yandex.ru/token'
 
 
     @property

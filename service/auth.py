@@ -16,6 +16,7 @@ class AuthService:
     user_repository: UserRepository
     settings: Settings
     google_client: GoogleClient
+    yandex_client: YandexClient
     
 
     def google_auth(self, code: str):
@@ -43,12 +44,14 @@ class AuthService:
         if user := self.user_repository.get_google_user_by_email(
             email=user_data.default_email):
             access_token =  self.generate_access_token(user_id=user.id)
+            return UserLoginSchema(user_id=user.id, access_token=access_token)
         created_user_data = UserCreateSchema(
             yandex_access_token=user_data.access_token,
             email=user_data.default_email,
             name=user_data.name,
         )
         created_user = self.user_repository.create_user(created_user_data)
+        access_token = self.generate_access_token(user_id=created_user.id)
         # print('       user data      ',user_data.json())
         # print('       created user      ',created_user.json())
         return UserLoginSchema(user_id=created_user.id, access_token=access_token)
