@@ -4,3 +4,7 @@ __pycache__/
 alembic
 .prod.env
 .dev.env
+tests
+gunicorn.conf.py
+async_test.py
+Makefile
