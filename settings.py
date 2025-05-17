@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     DB_PORT: int = 5431
     DB_USER: str = 'docker_postgres'
     DB_PASSWORD: str = 'docker_postgres'
-    DB_DRIVER: str = 'postgresql+psycopg2'
+    DB_DRIVER: str = 'postgresql+asyncpg'
     DB_NAME: str = 'docker_postgres'
     CACHE_HOST: str = 'localhost'
     CACHE_PORT: int = 6378
